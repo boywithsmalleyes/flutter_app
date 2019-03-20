@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/MyFadeTest.dart';
 import 'package:flutter_app/widgettest.dart';
+import 'package:flutter_app/SignaturePainter.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,8 +15,21 @@ class MyApp extends StatelessWidget {
       ),
 //      home: new SampleAppPage(),
       home: new MyFadeTest(title: "Fade Test"),
+//      home: new DemoApp(),
     );
   }
+}
+
+class DemoApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return new Scaffold(
+//      body: new Signature(),
+//      body: new Signature(),
+    );
+  }
+
 }
 
 //class RandomWordsState extends State<RandomWords> {
