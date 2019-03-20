@@ -42,7 +42,7 @@ class MyFadeState extends State<MyFadeTest> with TickerProviderStateMixin {
           child: new FadeTransition(
             opacity: curvedAnimation,
             child: new FlutterLogo(
-              size: 100.0,ªªª
+              size: 100.0,
             ),
           ),
         ),
