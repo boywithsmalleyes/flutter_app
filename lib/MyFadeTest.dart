@@ -53,6 +53,7 @@ class MyFadeState extends State<MyFadeTest> with TickerProviderStateMixin {
             controller.forward();
           } else {
             controller.reverse();
+            Navigator.of(context).pop("finish");
           }
           _toggle = !_toggle;
         },

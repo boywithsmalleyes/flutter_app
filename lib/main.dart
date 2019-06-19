@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/DatabasePage.dart';
+import 'package:flutter_app/HttpTest.dart';
+import 'package:flutter_app/ImagePickerPage.dart';
+import 'package:flutter_app/LayoutPage.dart';
 import 'package:flutter_app/MyFadeTest.dart';
+import 'package:flutter_app/TextPage.dart';
 import 'package:flutter_app/widgettest.dart';
-import 'package:flutter_app/SignaturePainter.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,9 +16,25 @@ class MyApp extends StatelessWidget {
       title: 'my app',
       theme: new ThemeData(
         primarySwatch: Colors.blue,
+        textSelectionColor: Colors.red
       ),
-//      home: new SampleAppPage(),
-      home: new MyFadeTest(title: "Fade Test"),
+//      home: new ImagePickerPage(),
+      home: new ImagePickerPage(),
+//      home: new TextPage(),
+//      home: new DatabasePage(),
+//      home: new LayoutPage(),
+//      home: new LifecycleWatcher(),
+//      home: new ProgressIndicatorPage(),
+//      home: new IsolatePage(),
+//      home: new HttpText(),
+//      home: new MyFadeTest(title: "Fade Test"),
+      routes: <String, WidgetBuilder>{
+        '/a': (BuildContext context) => new SampleAppPage(),
+        '/b': (BuildContext context) => new DemoApp(),
+        '/c': (BuildContext context) => new MyFadeTest(
+              title: "Fade Test",
+            )
+      },
 //      home: new DemoApp(),
     );
   }
@@ -27,9 +47,8 @@ class DemoApp extends StatelessWidget {
     return new Scaffold(
 //      body: new Signature(),
 //      body: new Signature(),
-    );
+        );
   }
-
 }
 
 //class RandomWordsState extends State<RandomWords> {

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 //void main() => runApp(MyApp());
-
-
-
 
 class SampleAppPage extends StatefulWidget {
   @override
@@ -11,32 +8,52 @@ class SampleAppPage extends StatefulWidget {
 }
 
 class SampleState extends State<SampleAppPage> {
+  static const platform = const MethodChannel('app.channel.shared.data');
+  String dataShared = 'No data';
+
   String textToShow = "I like Flutter";
   int count = 0;
 
   bool toggle = true;
 
-  void _toggle(){
+  @override
+  void initState() {
+    super.initState();
+    getSharedText();
+  }
+
+  void getSharedText() async {
+    var sharedData = await platform.invokeMethod("getSharedText");
+    if (sharedData != null) {
+      setState(() {
+        dataShared = sharedData;
+      });
+    }
+  }
+
+  void _toggle() async {
     setState(() {
       toggle = !toggle;
     });
   }
 
-  _getToggleChild(){
-    if(toggle) {
-      return new Text ("Toggle One");
+  _getToggleChild() {
+    if (toggle) {
+      return new Text(dataShared);
     } else {
       return new MaterialButton(onPressed: null, child: new Text("Toggle Two"));
     }
   }
 
-  void _updateText(){
-    setState((){
-      textToShow = "Flutter is Awesome ${count}" ;
+  _updateText() async {
+    dataShared = await Navigator.of(context).pushNamed('/c');
+    print("进入到 C 了");
+    setState(() {
+      dataShared = "Flutter is Awesome ${count}";
+//      Navigator.of(context).pushNamed("/c");
       count++;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +62,18 @@ class SampleState extends State<SampleAppPage> {
         title: new Text("Sample App"),
       ),
       body: new Center(
-        child: _getToggleChild(),
+        child: new Column(
+          children: <Widget>[
+            _getToggleChild(),
+            new IconButton(icon: new Icon(Icons.label), onPressed: _updateText)
+          ],
+        ),
 //        child: new MaterialButton(
 //          onPressed: _toggle,
 //          child: new Text(textToShow),
 //          padding: new EdgeInsets.only(left: 10.0, right: 10.0),
 //        )
       ),
-
       floatingActionButton: new FloatingActionButton(
         onPressed: _toggle,
         tooltip: 'Update Text',
@@ -60,5 +81,4 @@ class SampleState extends State<SampleAppPage> {
       ),
     );
   }
-
 }
